@@ -1,7 +1,9 @@
 HOST_NAME=pwd
 ZSH_DISABLE_COMPFIX="true"
 source ~/.nvm/nvm.sh
-nvm use stable
+nvm use --lts
+#nvm use stable
+#nvm use 17
 
 setopt autocd
 setopt appendhistory

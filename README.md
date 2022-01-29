@@ -1,25 +1,17 @@
 ## My .dotfiles with STOW
 
-The zshrc and nvim config were copy from my macbook air M1.
+The configs: zshrc is for M1; nvim, ranger are general
 
-#### Adopt Values from computer files.
-
+### Adopt Values from computer files.
 Flag "n" indicate Simulation Mode.
-
 If you remove letter "n" it will do it.
-
-`stow --adopt -nvSt ~ nvim zsh`
-
-#### Delete links (remove "n" flag when ready)
-
-`stow -nvDt ~ *`
-
-#### On a new machine (remove "n" flag when ready)
-
-`cd ~`
-
-`git clone https://github.com/AntonellaCoder/.dotfiles.git`
-
 `cd .dotfiles`
-
-`stow -nvSt ~ nvim zsh`
+`stow --adopt -nvSt ~ nvim zsh`
+### Delete links (remove "n" flag when ready)
+`cd .dotfiles`
+`stow -nvDt ~ nvim ranger zsh`
+### On a new machine (remove "n" flag when ready)
+`cd ~`
+`git clone https://github.com/AntonellaCoder/.dotfiles.git`
+`cd .dotfiles`
+`stow -nvSt ~ nvim ranger zsh`
