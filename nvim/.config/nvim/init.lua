@@ -63,7 +63,7 @@ vim.o.hlsearch = false
 vim.wo.number = true
 
 --Make relative nunmbers by me coder
---vim.wo.relativenumber = true
+vim.wo.relativenumber = true
 
 --Enable mouse mode
 vim.o.mouse = 'a'
@@ -256,8 +256,8 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
---Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver'}
+--Enable the following language servers (i removed tsserver)
+local servers = { 'clangd', 'rust_analyzer', 'pyright'}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -461,9 +461,11 @@ set.expandtab = true
 require('nvim-autopairs').setup{}
 
 -- lsp signatures
-require "lsp_signature".setup()
+require('lsp_signature').setup()
 
--- nvim tree
+-- nvim-tree
+--vim.cmd('let g:nvim_tree_highlight_opened_files = 1') -- line not working, it is changing icon's colors
+--require('nvim-tree').setup{} -- line not working, it is changing icon's colors
 vim.cmd('nnoremap <leader>n :NvimTreeToggle<CR>')
 vim.cmd('nnoremap <leader>r :NvimTreeRefresh<CR>')
 vim.cmd('nnoremap <leader>f :NvimTreeFindFile<CR>')
