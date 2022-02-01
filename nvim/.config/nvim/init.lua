@@ -104,6 +104,8 @@ vim.wo.signcolumn = 'yes'
 --Set colorscheme (onedark, gruvbox, nightfox)
 vim.o.termguicolors = true
 vim.cmd [[ colorscheme gruvbox ]]
+-- Set invert selection to avoid several colors select in visual mode.
+vim.g.gruvbox_invert_selection = false
 
 -- Set completeopt to have a better completion experience 'menuone,noselect'
 vim.o.completeopt = 'menuone,noselect'
@@ -591,14 +593,45 @@ vim.cmd('nnoremap <leader>n :NvimTreeToggle<CR>')
 vim.cmd('nnoremap <leader>r :NvimTreeRefresh<CR>')
 -- vim.cmd('nnoremap <leader>f :NvimTreeFindFile<CR>') --conflict  with keybinding.
 
+-- undotree
+vim.cmd('nnoremap <leader>u :UndotreeToggle<CR>')
+
 -- old files shortcut to navigation
 vim.cmd('nnoremap <leader>h :wincmd h<CR>')
 vim.cmd('nnoremap <leader>j :wincmd j<CR>')
 vim.cmd('nnoremap <leader>k :wincmd k<CR>')
 vim.cmd('nnoremap <leader>l :wincmd l<CR>')
 
--- undotree
-vim.cmd('nnoremap <leader>u :UndotreeToggle<CR>')
+-- Keep cursor in center while you go to next search.
+vim.cmd('nnoremap n nzzzv')
+vim.cmd('nnoremap N Nzzzv')
+
+-- keep cursor while you concatenate.
+vim.cmd('nnoremap J mzJ`z')
+
+-- undo breakpoints to undo by parts.
+vim.cmd('inoremap , ,<c-g>u')
+vim.cmd('inoremap . .<c-g>u')
+vim.cmd('inoremap ! !<c-g>u')
+vim.cmd('inoremap ? ?<c-g>u')
+
+-- ## Moving text in visual mode.
+vim.cmd("vnoremap J :m '>+1<CR>gv=gv")
+vim.cmd("vnoremap K :m '<-2<CR>gv=gv")
+
+-- Moving text in insert mode.
+vim.cmd("inoremap <C-j> <esc>:m .+1<CR>==")
+vim.cmd("inoremap <C-k> <esc>:m .-2<CR>==")
+
+-- Moving text in normal mode.
+vim.cmd('nnoremap <leader>j :m.+1<CR>==')
+vim.cmd('nnoremap <leader>k :m.-2<CR>==')
+
+-- Paste overwriting a text, it works on visual mode.
+vim.cmd('xnoremap <leader>p "_dP')
+
+-- Adding a new line on visual mode
+vim.cmd('nnoremap <leader>o :<C-u>call append(line("."),repeat([""],v:count1))<CR>')
 
 --vim.opt.autoindent = true
 -- vim: ts=2 sts=2 sw=2 et
