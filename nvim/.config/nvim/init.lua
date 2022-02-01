@@ -345,6 +345,46 @@ for _, lsp in pairs(servers) do
   }
 end
 
+-- ## LSP-CONFIG tsserver error handler.
+-- require('lspconfig').typescript.setup({
+--   handlers = {
+--     ["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _, config)
+--       if params.diagnostics ~= nil then
+--         local idx = 1
+--         while idx <= #params.diagnostics do
+--           if params.diagnostics[idx].code == 80001 then
+--             table.remove(params.diagnostics, idx)
+--           else
+--             idx = idx + 1
+--           end
+--         end
+--       end
+--       vim.lsp.diagnostic.on_publish_diagnostics(_, _, params, client_id, _, config)
+--     end,
+--   },
+-- })
+
+-- ## TSSERVER config to avoid display somme errors in javascript.
+require('lspconfig').tsserver.setup({
+  handlers = {
+    ["textDocument/publishDiagnostics"] = function(_, params, client_id, config) -- fixed by antonella coder
+    -- List of errors  https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
+        local ignore_codes = { 80001, 6133 }; -- others, see list above: {80001, 7016, 6133}
+        if params.diagnostics ~= nil then
+          local idx = 1
+          while idx <= #params.diagnostics do
+            if vim.tbl_contains(ignore_codes, params.diagnostics[idx].code) then
+              table.remove(params.diagnostics, idx)
+            else
+              idx = idx + 1
+            end
+          end
+        end
+        vim.lsp.diagnostic.on_publish_diagnostics(_, params, client_id, config) -- fixed my antonella coder
+      end,
+  },
+})
+
 -- Example custom server
 -- Make runtime files discoverable to the server
 -- local runtime_path = vim.split(package.path, ';')
@@ -416,7 +456,7 @@ local compare = require('cmp.config.compare')
 
 -- ## luasnip
 local has_words_before = function()
-  local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
