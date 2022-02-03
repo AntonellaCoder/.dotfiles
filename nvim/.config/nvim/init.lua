@@ -101,11 +101,11 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+-- Set invert selection to avoid several colors select in visual mode.
+vim.g.gruvbox_invert_selection = false
 --Set colorscheme (onedark, gruvbox, nightfox)
 vim.o.termguicolors = true
 vim.cmd [[ colorscheme gruvbox ]]
--- Set invert selection to avoid several colors select in visual mode.
-vim.g.gruvbox_invert_selection = false
 
 -- Set completeopt to have a better completion experience 'menuone,noselect'
 vim.o.completeopt = 'menuone,noselect'
@@ -623,9 +623,9 @@ vim.cmd("vnoremap K :m '<-2<CR>gv=gv")
 vim.cmd("inoremap <C-j> <esc>:m .+1<CR>==")
 vim.cmd("inoremap <C-k> <esc>:m .-2<CR>==")
 
--- Moving text in normal mode.
-vim.cmd('nnoremap <leader>j :m.+1<CR>==')
-vim.cmd('nnoremap <leader>k :m.-2<CR>==')
+-- Moving text in normal mode.(if put j conflict with window move up and down)
+vim.cmd('nnoremap <leader>J :m.+1<CR>==')
+vim.cmd('nnoremap <leader>K :m.-2<CR>==')
 
 -- Paste overwriting a text, it works on visual mode.
 vim.cmd('xnoremap <leader>p "_dP')
