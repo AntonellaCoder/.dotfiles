@@ -73,7 +73,11 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-path' -- added by me to completion from path source cmp
   use 'hrsh7th/cmp-calc' -- added by me to source cmp math calculation.
   use 'hrsh7th/cmp-emoji' -- added by me to source cmp emoji completion
+  use 'kamykn/spelunker.vim' -- to check spell.
 end)
+
+--Set languages.
+vim.o.spelllang='en,es'
 
 --Set highlight on search
 vim.o.hlsearch = false
