@@ -13,6 +13,7 @@ setopt INC_APPEND_HISTORY
 #setopt EXTENDED_HISTORY
 
 export PATH=$PATH:$HOME/bin
+export EDITOR=nvim
 
 export HISTSIZE=10000
 export SAVEHIST=10000

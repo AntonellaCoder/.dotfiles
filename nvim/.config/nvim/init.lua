@@ -24,6 +24,8 @@ vim.cmd [[
 -- keys: combination of keys
 -- mapping: what the keys do
 -- options: are a table where you pass aditional settings.
+-- to disable or enable spelunker in command line
+-- :lua vim.g.enable_spelunker_vim=0
 
 local use = require('packer').use
 require('packer').startup(function()
@@ -80,7 +82,7 @@ end)
 vim.o.spelllang='en,es'
 
 --Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 --Make line numbers default
 vim.wo.number = true
@@ -194,8 +196,15 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
-    file_ignore_patterns = {'node_modules'},
-     -- added by me to ignore search of tags in node_modules
+    file_ignore_patterns = {
+      'node_modules/',
+      'Library/',
+      'cache',
+      '%.local/',
+      'Movies/',
+      'Music/'
+    },
+     -- added by me to ignore search of tags in node_modules, it is working.
   },
 }
 
@@ -204,7 +213,7 @@ require('telescope').load_extension 'fzf'
 
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], _o)
-vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], _o)
+vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false, hidden = true})<CR>]], _o)
 vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], _o)
 vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], _o)
 vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], _o)
