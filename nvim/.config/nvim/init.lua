@@ -76,6 +76,8 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-calc' -- added by me to source cmp math calculation.
   use 'hrsh7th/cmp-emoji' -- added by me to source cmp emoji completion
   use 'kamykn/spelunker.vim' -- to check spell.
+  use 'winston0410/cmd-parser.nvim' --range-highlight.
+  use 'winston0410/range-highlight.nvim' --range-highlight.
 end)
 
 --Set languages.
@@ -598,6 +600,9 @@ require('nvim-autopairs').setup{}
 
 -- lsp signatures
 require('lsp_signature').setup()
+
+-- range-highlight
+require'range-highlight'.setup{}
 
 -- nvim-tree
 --vim.cmd('let g:nvim_tree_highlight_opened_files = 1') -- line not working, it is changing icon's colors
