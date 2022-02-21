@@ -59,6 +59,8 @@ function mkcd()
 }
 #nvim
 alias v='nvim'
+#python
+alias python='python3'
 # -------
 # Arch Aliases
 # -------
@@ -117,5 +119,13 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Replace "~" by "/Users/<yourUserName>" in the following lines where you see "~"
+
 # opam configuration
-[[ ! -r /Users/julio/.opam/opam-init/init.zsh ]] || source /Users/julio/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r ~/.opam/opam-init/init.zsh ]] || source ~/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/google-cloud-sdk/path.zsh.inc' ]; then . '~/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/google-cloud-sdk/completion.zsh.inc' ]; then . '~/google-cloud-sdk/completion.zsh.inc'; fi
